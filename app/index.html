@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HELIOS — Plataforma Fotovoltaica</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">☀</div>
+
+            <div>
+                <h1>HELIOS</h1>
+                <span>Photovoltaic Intelligence</span>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <button class="nav-item active" data-view="dashboard">
+                <span>▦</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" data-view="simulator">
+                <span>◉</span>
+                Simulador
+            </button>
+
+            <button class="nav-item" data-view="consumption">
+                <span>⌁</span>
+                Consumo
+            </button>
+
+            <button class="nav-item" data-view="scenarios">
+                <span>◇</span>
+                Escenarios
+            </button>
+
+            <button class="nav-item" data-view="system">
+                <span>⚙</span>
+                Sistema
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+            <span>Sistema fotovoltaico</span>
+            <strong>EN DESARROLLO</strong>
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">CENTRO DE CONTROL</p>
+                <h2>Dashboard energético</h2>
+            </div>
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                Sistema conectado
+            </div>
+
+        </header>
+
+
+        <section class="hero">
+
+            <div>
+
+                <p class="eyebrow">HELIOS ENGINE</p>
+
+                <h3>
+                    Energía solar,<br>
+                    <span>convertida en información.</span>
+                </h3>
+
+                <p class="hero-text">
+                    Visualiza, analiza y simula el comportamiento
+                    energético de una instalación fotovoltaica.
+                </p>
+
+                <button class="primary-button" id="open-simulator">
+                    Abrir simulador →
+                </button>
+
+            </div>
+
+
+            <div class="solar-visual">
+
+                <div class="sun">
+                    ☀
+                </div>
+
+                <div class="energy-ring ring-one"></div>
+                <div class="energy-ring ring-two"></div>
+
+            </div>
+
+        </section>
+
+
+        <section class="metrics">
+
+            <div class="metric-card">
+                <span>Generación hoy</span>
+                <strong>— kWh</strong>
+                <small>Esperando datos</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Consumo</span>
+                <strong>— kWh</strong>
+                <small>Sin datos registrados</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Cobertura solar</span>
+                <strong>— %</strong>
+                <small>Calculada por HELIOS</small>
+            </div>
+
+            <div class="metric-card">
+                <span>Potencia instalada</span>
+                <strong>— kWp</strong>
+                <small>Configuración pendiente</small>
+            </div>
+
+        </section>
+
+
+        <section class="dashboard-grid">
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">ANÁLISIS ENERGÉTICO</p>
+                        <h4>Generación vs consumo</h4>
+                    </div>
+
+                    <span class="panel-tag">
+                        PROYECCIÓN
+                    </span>
+
+                </div>
+
+
+                <div class="chart-placeholder">
+
+                    <div class="chart-line"></div>
+
+                    <div class="chart-labels">
+                        <span>Ene</span>
+                        <span>Feb</span>
+                        <span>Mar</span>
+                        <span>Abr</span>
+                        <span>May</span>
+                        <span>Jun</span>
+                    </div>
+
+                    <p>
+                        El gráfico aparecerá cuando HELIOS reciba datos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel system-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">CONFIGURACIÓN</p>
+                        <h4>Sistema fotovoltaico</h4>
+                    </div>
+
+                </div>
+
+
+                <div class="system-data">
+
+                    <div>
+                        <span>Paneles</span>
+                        <strong>—</strong>
+                    </div>
+
+                    <div>
+                        <span>Potencia por panel</span>
+                        <strong>— W</strong>
+                    </div>
+
+                    <div>
+                        <span>Inversor</span>
+                        <strong>—</strong>
+                    </div>
+
+                    <div>
+                        <span>Orientación</span>
+                        <strong>—</strong>
+                    </div>
+
+                </div>
+
+
+                <button class="secondary-button">
+                    Configurar sistema
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            HELIOS · Plataforma de análisis fotovoltaico · v0.1
+        </footer>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
