@@ -164,6 +164,7 @@ function mostrarDashboard() {
 
                 </div>
 
+
                 <div class="chart-placeholder">
 
                     <div class="chart-line"></div>
@@ -245,6 +246,7 @@ function mostrarDashboard() {
             mostrarSimulador();
 
         });
+
 }
 
 
@@ -380,7 +382,7 @@ function mostrarSimulador() {
                     <span>Potencia fotovoltaica</span>
 
                     <strong id="installed-power">
-                        66.00 kWp
+                        —
                     </strong>
 
                     <small>
@@ -447,23 +449,14 @@ function mostrarSimulador() {
         .querySelector("#simulate-system")
         .addEventListener("click", calcularSistema);
 
-
-    document
-        .querySelector("#panel-count")
-        .addEventListener("input", calcularSistema);
-
-
-    document
-        .querySelector("#panel-power")
-        .addEventListener("input", calcularSistema);
 }
 
 
 // ========================================
-// CÁLCULO INICIAL
+// CONEXIÓN CON HELIOS ENGINE
 // ========================================
 
-function calcularSistema() {
+async function calcularSistema() {
 
     const paneles =
         Number(document.querySelector("#panel-count").value);
@@ -471,13 +464,74 @@ function calcularSistema() {
     const potenciaPanel =
         Number(document.querySelector("#panel-power").value);
 
+    const perdidas =
+        Number(document.querySelector("#system-losses").value);
 
-    const potenciaTotal =
-        (paneles * potenciaPanel) / 1000;
+
+    if (
+        !Number.isFinite(paneles) ||
+        !Number.isFinite(potenciaPanel) ||
+        !Number.isFinite(perdidas)
+    ) {
+
+        document.querySelector("#installed-power").textContent =
+            "Datos inválidos";
+
+        return;
+    }
 
 
-    document.querySelector("#installed-power").textContent =
-        `${potenciaTotal.toFixed(2)} kWp`;
+    const url =
+        `http://localhost:8000/simular` +
+        `?paneles=${encodeURIComponent(paneles)}` +
+        `&potencia=${encodeURIComponent(potenciaPanel)}` +
+        `&perdidas=${encodeURIComponent(perdidas)}`;
+
+
+    const resultadoElemento =
+        document.querySelector("#installed-power");
+
+
+    resultadoElemento.textContent = "Calculando...";
+
+
+    try {
+
+        const respuesta = await fetch(url);
+
+
+        if (!respuesta.ok) {
+            throw new Error(
+                `Backend respondió con HTTP ${respuesta.status}`
+            );
+        }
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (resultado.error) {
+            throw new Error(resultado.error);
+        }
+
+
+        resultadoElemento.textContent =
+            `${Number(resultado.potencia_instalada).toFixed(2)} kWp`;
+
+
+        console.log("HELIOS ENGINE:", resultado);
+
+
+    } catch (error) {
+
+        console.error("HELIOS ENGINE:", error);
+
+        resultadoElemento.textContent =
+            "Error de conexión";
+
+    }
+
 }
 
 
@@ -584,3 +638,14 @@ function mostrarModuloBase(titulo, descripcion) {
     `;
 
 }
+
+
+// ========================================
+// INICIALIZACIÓN
+// ========================================
+
+// El Dashboard se carga automáticamente.
+// Esto hace que sus botones existan desde
+// el primer momento.
+
+mostrarDashboard();
